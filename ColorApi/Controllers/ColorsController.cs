@@ -1,86 +1,98 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ColorsController : ControllerBase
 {
-    private static List<Color> _colors = new List<Color>
-    {
-        new Color { Id = 1, ColorName = "ורוד", ColorHex = "#ffc7ff", Price = 35, IsInStock = true, DisplayOrder = 1 },
-        new Color { Id = 2, ColorName = "צהוב", ColorHex = "#f8ff21", Price = 42, IsInStock = true, DisplayOrder = 2 },
-        new Color { Id = 3, ColorName = "כחול", ColorHex = "#0073ff", Price = 28, IsInStock = false, DisplayOrder = 3 }
-    };
+    private readonly DataContext _context;
 
-    [HttpGet]
-    public ActionResult<List<Color>> GetColors()
+    // The database context is "injected" by the framework, giving us a connection.
+    public ColorsController(DataContext context)
     {
-        return Ok(_colors.OrderBy(c => c.DisplayOrder).ToList());
+        _context = context;
     }
 
-        // POST: api/colors
-    // Adds a new color. The color data is sent in the request body.
-    [HttpPost]
-    public ActionResult<Color> AddColor([FromBody] Color newColor)
+    // GET: api/colors
+    // Asynchronously gets all colors from the database, ordered by DisplayOrder.
+    [HttpGet]
+    public async Task<ActionResult<List<Color>>> GetColors()
     {
-        // In a real database, the ID would be generated automatically.
-        // Here, we'll simulate it by finding the max ID and adding 1.
-        newColor.Id = _colors.Max(c => c.Id) + 1;
-        _colors.Add(newColor);
-        
-        // Return the newly created color with its new ID.
+        var colors = await _context.Colors.OrderBy(c => c.DisplayOrder).ToListAsync();
+        return Ok(colors);
+    }
+
+    // POST: api/colors
+    // Asynchronously adds a new color to the database.
+    [HttpPost]
+    public async Task<ActionResult<Color>> AddColor([FromBody] Color newColor)
+    {
+        // Automatically set the display order for the new item.
+        var maxOrder = await _context.Colors.AnyAsync() ? await _context.Colors.MaxAsync(c => c.DisplayOrder) : 0;
+        newColor.DisplayOrder = maxOrder + 1;
+
+        _context.Colors.Add(newColor);
+        await _context.SaveChangesAsync(); // Saves the new color to the DB.
+
         return CreatedAtAction(nameof(GetColors), new { id = newColor.Id }, newColor);
     }
 
     // PUT: api/colors/{id}
-    // Updates an existing color. The ID is in the URL, and new data is in the body.
+    // Asynchronously finds a color by ID and updates its properties.
     [HttpPut("{id}")]
-    public IActionResult UpdateColor(int id, [FromBody] Color updatedColor)
+    public async Task<IActionResult> UpdateColor(int id, [FromBody] Color updatedColor)
     {
-        var existingColor = _colors.FirstOrDefault(c => c.Id == id);
+        var existingColor = await _context.Colors.FindAsync(id);
         if (existingColor == null)
         {
-            return NotFound(); // Return 404 if the color doesn't exist.
+            return NotFound();
         }
 
-        // Update the properties of the existing color.
         existingColor.ColorName = updatedColor.ColorName;
         existingColor.ColorHex = updatedColor.ColorHex;
         existingColor.Price = updatedColor.Price;
         existingColor.IsInStock = updatedColor.IsInStock;
-        // We don't update DisplayOrder here; that will be a separate bonus function.
         
-        return NoContent(); // Return 204 No Content to indicate success.
+        await _context.SaveChangesAsync(); // Saves the changes to the DB.
+        return NoContent();
     }
 
     // DELETE: api/colors/{id}
-    // Deletes a color by its ID from the URL.
+    // Asynchronously finds a color by ID and removes it.
     [HttpDelete("{id}")]
-    public IActionResult DeleteColor(int id)
+    public async Task<IActionResult> DeleteColor(int id)
     {
-        var colorToRemove = _colors.FirstOrDefault(c => c.Id == id);
+        var colorToRemove = await _context.Colors.FindAsync(id);
         if (colorToRemove == null)
         {
             return NotFound();
         }
 
-        _colors.Remove(colorToRemove);
+        _context.Colors.Remove(colorToRemove);
+        await _context.SaveChangesAsync(); // Saves the deletion to the DB.
         
-        return NoContent(); // Return 204 No Content to indicate success.
+        return NoContent();
     }
 
     // POST: api/colors/updateorder
-// Receives a list of IDs in their new order and updates the DisplayOrder property.
-[HttpPost("updateorder")]
-public IActionResult UpdateOrder([FromBody] List<int> ids)
-{
-    for (int i = 0; i < ids.Count; i++)
+    // Asynchronously updates the DisplayOrder for a list of colors.
+    [HttpPost("updateorder")]
+    public async Task<IActionResult> UpdateOrder([FromBody] List<int> ids)
     {
-        var color = _colors.FirstOrDefault(c => c.Id == ids[i]);
-        if (color != null)
+        var colors = await _context.Colors.ToListAsync();
+        
+        for (int i = 0; i < ids.Count; i++)
         {
-            color.DisplayOrder = i + 1;
+            // Find the color from the database that matches the current ID in the list.
+            var color = colors.FirstOrDefault(c => c.Id == ids[i]);
+            if (color != null)
+            {
+                // Update its order to match its new position.
+                color.DisplayOrder = i + 1;
+            }
         }
+
+        await _context.SaveChangesAsync(); // Saves all the reordering changes at once.
+        return Ok();
     }
-    return Ok();
-}
 }
