@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "1Yc3GEQuZi8A2QNSNi8ELKphAkRBNQRANhu5hemDPQc=",
+  "Source": "ColorApi",
+  "BasePath": "_content/ColorApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ColorApi\\wwwroot",
+      "Source": "ColorApi",
+      "ContentRoot": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\",
+      "BasePath": "_content/ColorApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\index.html",
+      "SourceId": "ColorApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\",
+      "BasePath": "_content/ColorApi",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\script.js",
+      "SourceId": "ColorApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\",
+      "BasePath": "_content/ColorApi",
+      "RelativePath": "script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\script.js"
+    },
+    {
+      "Identity": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\style.css",
+      "SourceId": "ColorApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\",
+      "BasePath": "_content/ColorApi",
+      "RelativePath": "style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\style.css"
+    }
+  ]
+}

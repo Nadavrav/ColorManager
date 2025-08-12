@@ -1,0 +1,19 @@
+body { font-family: Arial, sans-serif; direction: rtl; margin: 20px; background-color: #f9f9f9; }
+h2 { text-align: center; color: #333; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+th, td { border: 1px solid #ddd; padding: 12px; text-align: right; vertical-align: middle; }
+th { background-color: #007bff; color: white; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+tr:hover { background-color: #e9ecef; }
+.color-box { width: 25px; height: 25px; display: inline-block; border: 1px solid #ccc; vertical-align: middle; border-radius: 4px; }
+.actions button { margin-left: 5px; cursor: pointer; padding: 5px 10px; border: none; border-radius: 4px; color: white; }
+.btn-edit { background-color: #28a745; }
+.btn-delete { background-color: #dc3545; }
+#editFormContainer { border: 1px solid #ccc; padding: 20px; margin-top: 20px; max-width: 450px; display: none; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+#editFormContainer div { margin-bottom: 15px; display: flex; align-items: center; }
+#editFormContainer label { display: inline-block; width: 120px; font-weight: bold; }
+#editFormContainer input[type="text"], #editFormContainer input[type="number"] { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+#btnAddNew, #btnSave, #btnCancel { padding: 10px 15px; border-radius: 5px; border: none; color: white; cursor: pointer; }
+#btnAddNew { background-color: #007bff; }
+#btnSave { background-color: #28a745; margin-left: 10px; }
+#btnCancel { background-color: #6c757d; }

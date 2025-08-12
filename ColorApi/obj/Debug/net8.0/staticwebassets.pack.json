@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\script.js",
+      "PackagePath": "staticwebassets\\script.js"
+    },
+    {
+      "Id": "C:\\Code\\ColorManager\\ColorApi\\wwwroot\\style.css",
+      "PackagePath": "staticwebassets\\style.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ColorApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ColorApi.props",
+      "PackagePath": "build\\ColorApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ColorApi.props",
+      "PackagePath": "buildMultiTargeting\\ColorApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ColorApi.props",
+      "PackagePath": "buildTransitive\\ColorApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
